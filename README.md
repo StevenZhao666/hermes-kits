@@ -6,8 +6,8 @@ Hermes Agent 的技能包。每个包配一段提示词：贴给 Hermes，它自
 
 | 包 | 作用 | 下载 |
 |---|---|---|
-| `md-to-docx` | Markdown → Word（公式原生、表格边框、代码块底色、页码） | [最新版](https://github.com/StevenZhao666/hermes-kits/releases/latest/download/md-to-docx.zip) |
-| `md-to-pdf` | Markdown → PDF（pandoc + Typst：原生公式、中文排版、表格、代码块、页码） | [最新版](https://github.com/StevenZhao666/hermes-kits/releases/latest/download/md-to-pdf.zip) |
+| `md-to-docx` | Markdown → Word（公式原生、表格边框、代码块底色、页码） | [最新版](https://github.com/StevenZhao666/hermes-kits/releases/download/packs/md-to-docx.zip) |
+| `md-to-pdf` | Markdown → PDF（pandoc + Typst：原生公式、中文排版、表格、代码块、页码） | [最新版](https://github.com/StevenZhao666/hermes-kits/releases/download/packs/md-to-pdf.zip) |
 
 ## 交付方式
 
@@ -32,11 +32,15 @@ prompts/<包名>-链接.txt # 提示词（链接版）
 
 ```bash
 git add -A && git commit -m "update <包名>" && git push
-# 把 kits/<包名> 打成 zip（根目录必须是 <包名>/ 文件夹），作为 release 资产上传
-# 资产名必须等于 <包名>.zip
+# 打成 zip（根目录必须是 <包名>/ 文件夹），资产名等于 <包名>.zip
+# 上传到固定的 packs 发行版（替换同名资产），不要每包建一个 release
 ```
 
-链接用 `releases/latest/download/<包名>.zip`，永远指向最新版，提示词不用改。
+**所有包的 zip 都挂在同一个 tag 为 `packs` 的发行版下**，链接形如
+`https://github.com/StevenZhao666/hermes-kits/releases/download/packs/<包名>.zip`。
+
+不要用 `releases/latest/download/<包名>.zip`：`latest` 是全局的"最新一个发行版"，
+一旦为某个包单独发版，其它包的链接就会 404。
 
 ## 原则
 

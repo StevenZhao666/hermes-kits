@@ -1,4 +1,4 @@
-我要给你装一个技能，用来提升你生成 PDF 的效率：https://github.com/StevenZhao666/hermes-kits/releases/latest/download/md-to-pdf.zip
+我要给你装一个技能，用来提升你生成 PDF 的效率：https://github.com/StevenZhao666/hermes-kits/releases/download/packs/md-to-pdf.zip
 
 这件事你全程自己判断、自己动手。不要问我技术问题，也不要把技术细节讲给我听。
 
