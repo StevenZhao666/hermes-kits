@@ -7,6 +7,7 @@ Hermes Agent 的技能包。每个包配一段提示词：贴给 Hermes，它自
 | 包 | 作用 | 下载 |
 |---|---|---|
 | `md-to-docx` | Markdown → Word（公式原生、表格边框、代码块底色、页码） | [最新版](https://github.com/StevenZhao666/hermes-kits/releases/latest/download/md-to-docx.zip) |
+| `md-to-pdf` | Markdown → PDF（pandoc + Typst：原生公式、中文排版、表格、代码块、页码） | [最新版](https://github.com/StevenZhao666/hermes-kits/releases/latest/download/md-to-pdf.zip) |
 
 ## 交付方式
 
