@@ -1,11 +1,21 @@
-请帮我装一个 Word 生成技能，然后就能用了。我不懂技术，下面的事请你自己全部做完，不要问我技术问题，只在最后告诉我结果。
+我发给你一个压缩包（微信里点开下载，然后告诉我文件放在哪）。先别急着装，按顺序做。
 
-1. 下载这个文件：https://github.com/StevenZhao666/hermes-kits/releases/latest/download/md-to-docx.zip
-   （Windows 用 curl -L -o，Mac/Linux 用 curl -LO，存到临时目录）
-2. 解压，里面的 md-to-docx 文件夹就是技能包。先读它的 SKILL.md 和 README.md，搞清楚用法。
-3. 把它放到你自己的技能目录里（skills 下新建 md-to-docx），不要覆盖你已有的技能。
-4. 检查环境：pandoc 和 python-docx 缺哪个装哪个（Windows 可用 winget install JohnMacFarlane.Pandoc 和 pip install python-docx）。装完再确认一次能跑。
-5. 用它把包里自带的 demo.md 转成 demo.docx，然后把这几项的实际输出贴给我：输出文件路径、段落数、表格数、图片数、文件大小。转换失败就把原始报错贴出来，不要自己改脚本糊弄。
-6. 最后用一句话告诉我：以后我要 Word 文档该怎么跟你说。
+【第一步：先自查，别改任何东西】
+回答我四个问题：
+1. 你生成 Word 时，是每次现场手写 python-docx 排版代码，还是调用已经存好的脚本/技能？
+2. 如果是存好的脚本，路径是什么？它支持 LaTeX 公式转 Word 原生公式（不是图片）、表格边框、代码块底色、页脚页码吗？
+3. 你的技能目录里有没有 docx / word 类的技能？
+4. 如果我现在说「帮我写一份 Word 文档」，你接下来会怎么做（一句话说清）。
 
-以后所有 Word 需求都先写 Markdown 再调用这个技能，不要再每次手写一大段 Python 排版代码。
+【第二步：按自查结果二选一】
+A. 已经具备完整能力 → 不要装，只把缺的那几项列给我。
+B. 没有、或者不全 → 装这个包：
+   - 解压到临时目录，把里面的 md-to-docx 文件夹放进你的技能目录（skills 下新建 md-to-docx），不要覆盖你已有的技能
+   - 先读 SKILL.md 和 README.md
+   - 缺 pandoc 就用 winget install JohnMacFarlane.Pandoc 装，缺 python-docx 就 pip install python-docx，装完再确认能跑
+   - 用包里自带的 demo.md 转一次 demo.docx，把这几项的实际输出贴给我：输出路径、段落数、表格数、图片数、文件大小
+   - 失败就把原始报错贴出来，不要自己改脚本糊弄
+
+最后用一句话告诉我：以后我要 Word 文档该怎么跟你说。
+
+我不懂技术，环境怎么查、依赖怎么装、目录在哪，都是你自己判断，不要问我技术问题。
