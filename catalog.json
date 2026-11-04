@@ -3,6 +3,27 @@
   "entrypoint": "https://raw.githubusercontent.com/StevenZhao666/hermes-kits/main/CATALOG.md",
   "entries": [
     {
+      "id": "hermes-starter",
+      "name": "Hermes Starter",
+      "type": "kit-bundle",
+      "platform": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "deps": [],
+      "audience": "刚装 Hermes，需要记忆整理、避坑知识、文档处理这套底座",
+      "get": "https://github.com/StevenZhao666/hermes-kits/releases/download/packs/hermes-starter.zip",
+      "install": "解压后把 skills-必装/ 与 skills-按环境选装/ 放进 skills/，或按包内 提示词.md 走完整初始化",
+      "limits": "其中 3 个技能按环境选装（大陆网络 / Windows / 中文试卷）",
+      "tags": [
+        "hermes",
+        "memory",
+        "onboarding"
+      ],
+      "featured": true
+    },
+    {
       "id": "md-to-docx",
       "name": "md-to-docx",
       "type": "kit",

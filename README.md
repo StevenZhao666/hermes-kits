@@ -6,6 +6,7 @@ Hermes Agent 的技能包与桌面工具目录。
 
 | 包 | 作用 | 下载 |
 |---|---|---|
+| `hermes-starter` | 新手底座：记忆整理 + 避坑 + 文档处理（8 个技能） | [zip](https://github.com/StevenZhao666/hermes-kits/releases/download/packs/hermes-starter.zip) |
 | `md-to-docx` | Markdown → Word（公式原生、表格边框、代码块底色、页码） | [zip](https://github.com/StevenZhao666/hermes-kits/releases/download/packs/md-to-docx.zip) |
 | `md-to-pdf` | Markdown → PDF（pandoc + Typst：原生公式、中文排版、表格、代码块、页码） | [zip](https://github.com/StevenZhao666/hermes-kits/releases/download/packs/md-to-pdf.zip) |
 

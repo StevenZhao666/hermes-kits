@@ -25,7 +25,7 @@
 | Markdown 交作业要 PDF | md-to-pdf |
 | 读英文文档老查词 | Smart Dictionary |
 | 想自己排健身计划 | SimpleTrainer |
-| 分不清颜色但要做色号题 | ColorPicker |
+| 要采屏幕颜色 | ColorPicker |
 | Wi-Fi 慢，想试试改网卡设置 | Network Optimizer |
 | 玩一下 / 演示 | Piano、重构防线 |
 | 学线代要精确分数解方程 | Gauss Elim |
@@ -34,6 +34,16 @@
 ---
 
 ## 技能包
+
+### Hermes Starter
+
+- **类型**：Hermes 技能包合集（8 个技能）
+- **平台**：Windows / macOS / Linux
+- **依赖**：无
+- **适合**：刚装 Hermes，需要记忆整理、避坑知识、文档处理这套底座
+- **获取**：https://github.com/StevenZhao666/hermes-kits/releases/download/packs/hermes-starter.zip
+- **安装**：解压后把 `skills-必装/` 与 `skills-按环境选装/` 放进 `skills/`，或按包内 `提示词.md` 走完整初始化
+- **限制**：其中 3 个技能按环境选装（大陆网络 / Windows / 中文试卷）
 
 ### md-to-docx
 
@@ -106,9 +116,9 @@
 - **类型**：桌面工具（人用）
 - **平台**：Windows
 - **依赖**：AutoHotkey v2
-- **适合**：不靠眼睛辨色、要对着 `#RRGGBB` 逐字符比对的人
+- **适合**：要采屏幕上的颜色值（HEX / RGB）
 - **获取**：https://raw.githubusercontent.com/StevenZhao666/hermes-kits/main/tools/color-picker/ColorPicker.ahk
-- **安装**：装 AHK v2 → 双击脚本 → `Ctrl+Alt+C` 取色，左键复制
+- **安装**：装 AHK v2 → 双击脚本 → `Ctrl+Alt+C` 采色，左键复制
 - **限制**：仅 Windows；改热键要编辑脚本
 
 ### Network Optimizer
