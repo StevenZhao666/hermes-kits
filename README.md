@@ -15,6 +15,7 @@ Hermes Agent 的技能包。每个包配一段提示词：贴给 Hermes，它自
 
 - [CATALOG.md](CATALOG.md) —— 人看也 agent 读，每条五项：依赖 / 适合 / 获取 / 安装 / 限制
 - [catalog.json](catalog.json) —— 机器读，字段同构
+- [docs/intro.md](docs/intro.md) —— 一页人看的简介：有什么、怎么发、为什么这样发
 
 发给别人时只需要一句话：
 
