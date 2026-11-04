@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Canvas 练手台 · 5 个任务</title>
+<style>
+  body{margin:0;padding:12px 10px 40px;background:#0d1520;color:#c8d8e8;
+       font:15px/1.7 "Microsoft YaHei","PingFang SC",sans-serif}
+  h2{max-width:640px;margin:0 auto 10px;font-size:17px;color:#4dc9f6}
+  canvas{background:#0a1018;border:1px solid #23405a;display:block;margin:0 auto;touch-action:none;max-width:100%}
+  .panel{max-width:640px;margin:14px auto 0;font-size:13.5px}
+  .panel h3{color:#4dc9f6;font-size:14px;margin:16px 0 6px;border-bottom:1px solid #1c2c3a;padding-bottom:4px}
+  ul{padding-left:20px}
+  li{margin:5px 0}
+  code{background:#16232e;padding:1px 5px;border-radius:3px;color:#7fd4ff;font-family:Consolas,monospace}
+  .hint{color:#7a93a8}
+  table{border-collapse:collapse;font-size:12.5px;width:100%}
+  td{border:1px solid #22374a;padding:4px 6px;vertical-align:top}
+  td:first-child{white-space:nowrap;color:#7fd4ff;font-family:Consolas,monospace}
+</style>
+</head>
+<body>
+<h2>Canvas 练手台</h2>
+<canvas id="game" width="640" height="400"></canvas>
+
+<div class="panel">
+  <h3>怎么玩这个练习台</h3>
+  <ul>
+    <li>先直接打开看效果：一个会左右移动的红色敌人、一座橙色塔。</li>
+    <li>脚本里共有 <b>5 个【任务】</b>，都写在注释里（搜 <code>【任务</code>）。照着提示改，<b>保存 → 刷新页面</b>就能看到变化。</li>
+    <li>画布上的坐标显示：动动鼠标，看 <code>(0,0)</code> 是不是在<b>左上角</b>、y 是不是<b>往下增</b>。</li>
+    <li>实在卡住了再问我，别自己硬耗。</li>
+  </ul>
+
+  <h3>5 个任务（由易到难）</h3>
+  <ul>
+    <li><b>任务 1</b>：给敌人加血条（<code>fillRect</code> ×2）</li>
+    <li><b>任务 2</b>：把敌人从圆改成三角形（<code>moveTo</code> / <code>lineTo</code> / <code>closePath</code>）</li>
+    <li><b>任务 3</b>：鼠标悬停到塔上时显示射程圈（<code>arc</code> + 距离判断）</li>
+    <li><b>任务 4</b>：把纯色背景改成网格（两层 for 循环 + <code>strokeRect</code>）</li>
+    <li><b>任务 5</b>：点击画布放一座新塔（<code>click</code> 事件 + 数组 push）</li>
+  </ul>
+
+  <h3>速查卡：Canvas 只有这些东西</h3>
+  <table>
+    <tr><td>ctx.fillRect(x,y,w,h)</td><td>画实心矩形（背景、血条、塔身、按钮底）</td></tr>
+    <tr><td>ctx.strokeRect(x,y,w,h)</td><td>画空心矩形（格子线、虚线框）</td></tr>
+    <tr><td>ctx.beginPath()<br>ctx.arc(x,y,r,0,Math.PI*2)<br>ctx.fill() / ctx.stroke()</td><td>画圆/圆弧：先 beginPath 起头，arc 画路径，最后 fill 涂色或 stroke 描边</td></tr>
+    <tr><td>ctx.moveTo(x,y)<br>ctx.lineTo(x,y)<br>ctx.closePath()</td><td>画多边形（三角形、六边形、折线图）</td></tr>
+    <tr><td>ctx.fillText(文字,x,y)</td><td>写文字（要先设 <code>ctx.font</code> 和 <code>ctx.textAlign</code>）</td></tr>
+    <tr><td>ctx.fillStyle / ctx.strokeStyle<br>ctx.lineWidth</td><td>笔的颜色和粗细 —— <b>设置一次，后面所有绘制都跟着变</b>（这是最容易忘的坑）</td></tr>
+    <tr><td>ctx.clearRect / fillRect 全屏</td><td>每帧开头清屏，否则会拖影</td></tr>
+    <tr><td>ctx.save() / ctx.restore()</td><td>临时改样式/位移/旋转，用完恢复原状</td></tr>
+    <tr><td>ctx.translate / ctx.rotate</td><td>把坐标系平移、旋转（画旋转的图形时才用）</td></tr>
+  </table>
+
+  <h3>记住这三句话就够了</h3>
+  <ul>
+    <li><b>canvas 是一块白板，ctx 是一支笔。</b>没有"对象"，只有"你每帧重新画一遍"。</li>
+    <li><b>动画 = 每帧擦掉重画。</b>位置存在变量里，帧循环里改变量、再画出来。</li>
+    <li><b>坐标永远是左上角 (0,0)，x 向右、y 向下。</b>所有定位问题都能靠这句话想明白。</li>
+  </ul>
+</div>
+
+<script>
+// ============================================================
+// 第 1 步：拿到画布和"画笔"
+//   canvas  = 那块白板
+//   ctx     = 画笔，所有绘制都调它
+// ============================================================
+const canvas = document.getElementById('game');
+const ctx = canvas.getContext('2d');
+const W = canvas.width, H = canvas.height;
+const CELL = 40;                                  // 一格 = 40 像素（游戏里叫 CONFIG.CELL）
+
+// ---------- 游戏状态（就是几个变量而已） ----------
+const mouse = { x: -1, y: -1, inside: false };    // 鼠标位置
+const enemy = { x: 60, y: 120, r: 14, hp: 0.7 };  // 敌人（hp = 0~1 的血量比例）
+let towers = [ { x: 200, y: 200, range: 3 } ];    // 塔列表（range 单位是"格"）
+let t0 = 0, elapsed = 0;                          // 计时
+
+// ============================================================
+// 第 2 步：每帧两件事 —— update 改状态、render 画画面
+// ============================================================
+function update(dt) {
+  elapsed += dt;
+  enemy.x = 60 + Math.sin(elapsed * 2) * 80;      // 让敌人左右飘 —— 这就是"动画"的全部秘密
+}
+
+function render() {
+  drawBackground();
+  drawTower();
+  drawEnemy();
+  drawHUD();
+}
+
+function frame(ts) {
+  if (!t0) t0 = ts;
+  const dt = (ts - t0) / 1000;                    // 距上一帧过了几秒
+  t0 = ts;
+  update(dt);
+  render();
+  requestAnimationFrame(frame);                   // 预约下一帧（浏览器每帧回调一次）
+}
+
+// ---------- 画背景 ----------
+function drawBackground() {
+  ctx.fillStyle = '#0a1018';
+  ctx.fillRect(0, 0, W, H);
+
+  // 【任务 4】把上面的纯色背景改成网格：
+  //   写两层 for 循环（x 从 0 到 W，y 从 0 到 H，每次加 CELL）
+  //   循环里调 ctx.strokeStyle = 'rgba(60,120,160,0.18)'; ctx.lineWidth = 1;
+  //            ctx.strokeRect(x, y, CELL, CELL);
+  //   目标：画布上出现整齐的 40×40 格子，像塔防的地图
+}
+
+// ---------- 画塔 ----------
+function drawTower() {
+  for (const t of towers) {
+    ctx.fillStyle = '#dd8844';
+    ctx.fillRect(t.x - CELL * 0.45, t.y - CELL * 0.45, CELL * 0.9, CELL * 0.9);
+
+    // 【任务 3】鼠标悬停在塔上时，画出射程圈：
+    //   ① 判断距离：const d = Math.hypot(mouse.x - t.x, mouse.y - t.y);
+    //      距离小于半径( t.range * CELL ) 就算"悬停在塔上"
+    //   ② 画圆：ctx.beginPath(); ctx.arc(t.x, t.y, t.range * CELL, 0, Math.PI * 2);
+    //          ctx.strokeStyle = 'rgba(80,200,255,0.8)'; ctx.lineWidth = 2; ctx.stroke();
+    //   顺便想想：为什么画圆要先 beginPath()？（因为画笔要把"上一笔画到哪了"清掉）
+  }
+}
+
+// ---------- 画敌人 ----------
+function drawEnemy() {
+  // 【任务 2】把这段圆改成三角形：
+  //   ctx.beginPath();
+  //   ctx.moveTo(enemy.x, enemy.y - enemy.r);               // 顶点
+  //   ctx.lineTo(enemy.x + enemy.r, enemy.y + enemy.r * 0.8);  // 右下一个点
+  //   ctx.lineTo(enemy.x - enemy.r, enemy.y + enemy.r * 0.8);  // 左下一个点
+  //   ctx.closePath();                                      // 收口
+  //   ctx.fillStyle = '#ee4444'; ctx.fill(); ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(enemy.x, enemy.y, enemy.r, 0, Math.PI * 2);
+  ctx.fillStyle = '#ee4444';
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+  ctx.stroke();
+
+  // 【任务 1】血条：
+  //   灰底：ctx.fillStyle = 'rgba(0,0,0,0.6)'; ctx.fillRect(enemy.x - 20, enemy.y - enemy.r - 10, 40, 5);
+  //   血量：ctx.fillStyle = '#4dd07a'; ctx.fillRect(enemy.x - 20, enemy.y - enemy.r - 10, 40 * enemy.hp, 5);
+  //   想通一件事：一个矩形就是一根血条 —— 游戏里所有 UI 都是这么画出来的
+}
+
+// ---------- 画文字 ----------
+function drawHUD() {
+  ctx.fillStyle = '#7fd4ff';
+  ctx.font = '13px monospace';
+  ctx.textAlign = 'left';
+  ctx.fillText('鼠标坐标: ' + (mouse.inside ? Math.round(mouse.x) + ', ' + Math.round(mouse.y) : '—'), 10, 20);
+  ctx.fillText('塔: ' + towers.length + ' 座', 10, 40);
+}
+
+// ============================================================
+// 第 3 步：把鼠标/手指坐标换算成画布坐标
+//   （画布被 CSS 缩放过，所以必须乘一个缩放比例）
+// ============================================================
+function toCanvasPos(e) {
+  const r = canvas.getBoundingClientRect();
+  const sx = canvas.width / r.width, sy = canvas.height / r.height;
+  const p = (e.touches && e.touches.length) ? e.touches[0]
+          : (e.changedTouches && e.changedTouches.length) ? e.changedTouches[0] : e;
+  return { x: (p.clientX - r.left) * sx, y: (p.clientY - r.top) * sy };
+}
+
+function onMove(e) {
+  const p = toCanvasPos(e);
+  mouse.x = p.x; mouse.y = p.y; mouse.inside = true;
+}
+canvas.addEventListener('mousemove', onMove);
+canvas.addEventListener('touchmove', e => { e.preventDefault(); onMove(e); }, { passive: false });
+canvas.addEventListener('mouseleave', () => { mouse.inside = false; });
+
+// 【任务 5】点击放塔：
+//   canvas.addEventListener('click', e => { ... });
+//   ① const p = toCanvasPos(e);
+//   ② towers.push({ x: p.x, y: p.y, range: 2 });
+//   目标：点哪儿就在哪儿出现一座塔 —— 这就是你游戏里"部署"的原始形态
+
+frame();
+</script>
+</body>
+</html>

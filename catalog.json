@@ -1,0 +1,257 @@
+{
+  "updated": "2026-11-04",
+  "entrypoint": "https://raw.githubusercontent.com/StevenZhao666/hermes-kits/main/CATALOG.md",
+  "entries": [
+    {
+      "id": "md-to-docx",
+      "name": "md-to-docx",
+      "type": "kit",
+      "platform": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "deps": [
+        "pandoc",
+        "python-docx"
+      ],
+      "audience": "要把 Markdown 转成 Word 的人",
+      "get": "https://github.com/StevenZhao666/hermes-kits/releases/download/packs/md-to-docx.zip",
+      "install": "连同 prompts/md-to-docx.txt 交给 agent，由它装依赖并跑 demo",
+      "limits": "复杂嵌套表格和自定义样式需手工调",
+      "tags": [
+        "document",
+        "word"
+      ]
+    },
+    {
+      "id": "md-to-pdf",
+      "name": "md-to-pdf",
+      "type": "kit",
+      "platform": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "deps": [
+        "pandoc",
+        "typst"
+      ],
+      "audience": "要把 Markdown 转成 PDF 的人",
+      "get": "https://github.com/StevenZhao666/hermes-kits/releases/download/packs/md-to-pdf.zip",
+      "install": "连同 prompts/md-to-pdf.txt 交给 agent",
+      "limits": "字体需本机存在",
+      "tags": [
+        "document",
+        "pdf"
+      ]
+    },
+    {
+      "id": "markdown-viewer",
+      "name": "MarkdownViewer",
+      "type": "tool",
+      "platform": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "deps": [],
+      "audience": "写带公式的笔记、作业、讲义",
+      "get": "https://raw.githubusercontent.com/StevenZhao666/markdown-viewer/master/dist/MarkdownViewer.html",
+      "install": "下载后双击，拖入 .md，Ctrl+S 保存",
+      "limits": "表格编辑不完整；保存需 Chrome/Edge",
+      "tags": [
+        "notes",
+        "latex",
+        "editor"
+      ],
+      "featured": true
+    },
+    {
+      "id": "markdown-viewer-lite",
+      "name": "MarkdownViewer Lite",
+      "type": "tool",
+      "platform": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "deps": [],
+      "audience": "只要轻量公式编辑器的人",
+      "get": "https://raw.githubusercontent.com/StevenZhao666/markdown-viewer/master/MarkdownViewer-lite.html",
+      "install": "下载后双击",
+      "limits": "保存走浏览器下载；功能少于完整版",
+      "tags": [
+        "notes",
+        "latex"
+      ]
+    },
+    {
+      "id": "smart-dictionary",
+      "name": "Smart Dictionary",
+      "type": "tool",
+      "platform": [
+        "windows"
+      ],
+      "deps": [
+        "AutoHotkey v2",
+        "DeepSeek API Key"
+      ],
+      "audience": "经常读英文术语的人",
+      "get": "https://github.com/StevenZhao666/smart-dictionary/archive/refs/heads/master.zip",
+      "install": "装 AHK v2 → 双击 smart-dict.ahk → Ctrl+Alt+Space 填 key",
+      "limits": "本地词库未命中才调 API",
+      "tags": [
+        "dictionary",
+        "ahk"
+      ]
+    },
+    {
+      "id": "simple-trainer",
+      "name": "SimpleTrainer",
+      "type": "tool",
+      "platform": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "deps": [],
+      "audience": "想自己排训练计划的人",
+      "get": "https://github.com/StevenZhao666/simple-trainer/archive/refs/heads/master.zip",
+      "install": "打开 开发/generator.html 生成 trainer.html",
+      "limits": "数据存 localStorage，换浏览器会丢",
+      "tags": [
+        "fitness"
+      ]
+    },
+    {
+      "id": "color-picker",
+      "name": "ColorPicker",
+      "type": "tool",
+      "platform": [
+        "windows"
+      ],
+      "deps": [
+        "AutoHotkey v2"
+      ],
+      "audience": "不靠眼睛辨色、要按色号比对的人",
+      "get": "https://raw.githubusercontent.com/StevenZhao666/hermes-kits/main/tools/color-picker/ColorPicker.ahk",
+      "install": "装 AHK v2 → 双击脚本 → Ctrl+Alt+C 取色",
+      "limits": "仅 Windows；改热键需编辑脚本",
+      "tags": [
+        "color",
+        "ahk",
+        "accessibility"
+      ]
+    },
+    {
+      "id": "network-optimizer",
+      "name": "Network Optimizer",
+      "type": "tool",
+      "platform": [
+        "windows"
+      ],
+      "deps": [
+        "PowerShell 5.1"
+      ],
+      "audience": "Wi-Fi 慢、想调网卡设置的人",
+      "get": "https://raw.githubusercontent.com/StevenZhao666/hermes-kits/main/tools/network-optimizer/optimize-network.bat",
+      "install": "双击运行（自动提权）；还原用 restore-network.bat",
+      "limits": "断网十几秒；不是万能提速",
+      "tags": [
+        "network",
+        "windows"
+      ]
+    },
+    {
+      "id": "piano",
+      "name": "Piano",
+      "type": "tool",
+      "platform": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "deps": [],
+      "audience": "玩",
+      "get": "https://raw.githubusercontent.com/StevenZhao666/hermes-kits/main/tools/piano/piano.html",
+      "install": "下载后双击",
+      "limits": "键盘映射固定",
+      "tags": [
+        "fun"
+      ]
+    },
+    {
+      "id": "gauss-elim",
+      "name": "Gauss Elim",
+      "type": "tool",
+      "platform": [
+        "windows"
+      ],
+      "deps": [],
+      "audience": "线代作业要精确分数解的人",
+      "get": "https://raw.githubusercontent.com/StevenZhao666/hermes-kits/main/tools/gauss-elim/gauss.exe",
+      "install": "下载后双击，按提示输入",
+      "limits": "控制台交互；不做符号化简",
+      "tags": [
+        "math",
+        "linear-algebra"
+      ]
+    },
+    {
+      "id": "reforging-defense-line",
+      "name": "重构防线",
+      "type": "tool",
+      "platform": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "deps": [],
+      "audience": "玩塔防 / 看单文件样例",
+      "get": "https://github.com/StevenZhao666/reforging-defense-line",
+      "install": "下载仓库后打开 dist/index.html",
+      "limits": "需同目录 app.js",
+      "tags": [
+        "game"
+      ]
+    },
+    {
+      "id": "inkbloom",
+      "name": "Inkbloom",
+      "type": "app",
+      "platform": [
+        "windows",
+        "macos"
+      ],
+      "deps": [],
+      "audience": "写长文、小说的人",
+      "get": "https://github.com/StevenZhao666/inkbloom",
+      "install": "下载 Release 安装包",
+      "limits": "安装包约 270MB",
+      "tags": [
+        "writing",
+        "electron"
+      ]
+    },
+    {
+      "id": "canvas-lab",
+      "name": "Canvas Lab",
+      "type": "sample",
+      "platform": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "deps": [],
+      "audience": "学 Canvas / 看单文件样例",
+      "get": "https://raw.githubusercontent.com/StevenZhao666/hermes-kits/main/tools/canvas-lab/canvas-lab.html",
+      "install": "下载后双击",
+      "limits": "5 个固定任务，非通用工具",
+      "tags": [
+        "canvas",
+        "learning"
+      ]
+    }
+  ]
+}

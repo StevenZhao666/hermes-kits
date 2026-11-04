@@ -9,6 +9,20 @@ Hermes Agent 的技能包。每个包配一段提示词：贴给 Hermes，它自
 | `md-to-docx` | Markdown → Word（公式原生、表格边框、代码块底色、页码） | [最新版](https://github.com/StevenZhao666/hermes-kits/releases/download/packs/md-to-docx.zip) |
 | `md-to-pdf` | Markdown → PDF（pandoc + Typst：原生公式、中文排版、表格、代码块、页码） | [最新版](https://github.com/StevenZhao666/hermes-kits/releases/download/packs/md-to-pdf.zip) |
 
+## 完整资源目录
+
+技能包之外，桌面小工具（MarkdownViewer、Smart Dictionary、ColorPicker 等）统一登记在：
+
+- [CATALOG.md](CATALOG.md) —— 人看也 agent 读，每条五项：依赖 / 适合 / 获取 / 安装 / 限制
+- [catalog.json](catalog.json) —— 机器读，字段同构
+
+发给别人时只需要一句话：
+
+```
+读 https://raw.githubusercontent.com/StevenZhao666/hermes-kits/main/CATALOG.md
+按我的情况挑 1-2 个装好，装完告诉我装了什么、怎么打开、有什么限制。
+```
+
 ## 交付方式
 
 两种，按对方能不能收到文件选：
