@@ -1,28 +1,15 @@
 # Agent 工具清单
 
-一套自己做的工具和技能包。分两类：
+一套自己做的工具和技能包，分两类：
 
 - **技能包**：装进 Hermes，让 agent 多一项能力（转 Word、转 PDF）
-- **桌面工具**：装给你自己用，双击就开（写笔记、查词、取色、改网卡）
+- **桌面工具**：双击就开（写笔记、查词、取色、改网卡）
 
 ---
 
-## 一句话拿走
+## 有什么
 
-把这句话连同链接发给任何一个 AI agent，它自己读目录、自己挑、自己装：
-
-```
-读 https://raw.githubusercontent.com/StevenZhao666/hermes-kits/main/CATALOG.md
-按我的情况挑 1-2 个装好，装完告诉我装了什么、怎么打开、有什么限制。
-```
-
-不需要打包、不需要解压、不需要教它怎么装。目录里每条都写了依赖、适合谁、怎么装、有什么限制。
-
----
-
-## 里面有什么
-
-| 名字 | 给谁 | 一句话 |
+| 名字 | 适合谁 | 一句话 |
 |---|---|---|
 | MarkdownViewer | 所有人 | 一个 html 文件，双击就能写带公式的笔记 |
 | md-to-docx | 要交 Word 的人 | Markdown 转 Word，公式原生、表格有边框 |
@@ -37,11 +24,17 @@
 
 ---
 
-## 为什么这样发
+## 怎么用
 
-以前是发 zip：对方要解压、找目录、可能装错，出问题还得远程。
+**技能包**：下载 zip，解压后放进 Hermes 的 `skills/`，按包内 `README.md` 操作。
 
-现在只发一个链接。目录是给 agent 读的，它自己判断平台、装依赖、验证能不能跑，最后用三句人话汇报。人不需要懂任何技术细节。
+**桌面工具**：在 [CATALOG.md](../CATALOG.md) 里找到对应条目，按「获取」下载，按「安装」打开。每条都写了依赖和限制，先看再装。
+
+**让 agent 自己挑**：把目录链接交给它即可，目录里的「读取方式」写明了判断规则。
+
+```
+https://raw.githubusercontent.com/StevenZhao666/hermes-kits/main/CATALOG.md
+```
 
 ---
 
@@ -50,13 +43,3 @@
 - 目录（agent 读）：https://raw.githubusercontent.com/StevenZhao666/hermes-kits/main/CATALOG.md
 - 目录（人看）：https://github.com/StevenZhao666/hermes-kits/blob/main/CATALOG.md
 - 仓库：https://github.com/StevenZhao666/hermes-kits
-
----
-
-## 维护
-
-新增工具时：
-
-1. 单文件放 `tools/<名字>/`，独立项目只登记链接
-2. 在 `CATALOG.md` 补一条（五项格式），同步 `catalog.json`
-3. 发布前跑脱敏扫描，确认没有个人路径和密钥

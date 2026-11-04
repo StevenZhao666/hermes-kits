@@ -1,44 +1,47 @@
 # hermes-kits
 
-Hermes Agent 的技能包。每个包配一段提示词：贴给 Hermes，它自己判断要不要装、自己装、自己测。
+Hermes Agent 的技能包与桌面工具目录。
 
-## 已有的包
+## 技能包
 
 | 包 | 作用 | 下载 |
 |---|---|---|
-| `md-to-docx` | Markdown → Word（公式原生、表格边框、代码块底色、页码） | [最新版](https://github.com/StevenZhao666/hermes-kits/releases/download/packs/md-to-docx.zip) |
-| `md-to-pdf` | Markdown → PDF（pandoc + Typst：原生公式、中文排版、表格、代码块、页码） | [最新版](https://github.com/StevenZhao666/hermes-kits/releases/download/packs/md-to-pdf.zip) |
+| `md-to-docx` | Markdown → Word（公式原生、表格边框、代码块底色、页码） | [zip](https://github.com/StevenZhao666/hermes-kits/releases/download/packs/md-to-docx.zip) |
+| `md-to-pdf` | Markdown → PDF（pandoc + Typst：原生公式、中文排版、表格、代码块、页码） | [zip](https://github.com/StevenZhao666/hermes-kits/releases/download/packs/md-to-pdf.zip) |
 
-## 完整资源目录
+安装：解压后把包目录放进 Hermes 的 `skills/`，或按包内 `README.md` 操作。
 
-技能包之外，桌面小工具（MarkdownViewer、Smart Dictionary、ColorPicker 等）统一登记在：
+## 桌面工具
 
-- [CATALOG.md](CATALOG.md) —— 人看也 agent 读，每条五项：依赖 / 适合 / 获取 / 安装 / 限制
-- [catalog.json](catalog.json) —— 机器读，字段同构
-- [docs/intro.md](docs/intro.md) —— 一页人看的简介：有什么、怎么发、为什么这样发
+MarkdownViewer、Smart Dictionary、ColorPicker、Network Optimizer 等，共 11 个。
 
-发给别人时只需要一句话：
+- [CATALOG.md](CATALOG.md) —— 全部条目，每条五项：依赖 / 适合 / 获取 / 安装 / 限制
+- [catalog.json](catalog.json) —— 结构化版本，字段同构
+- [docs/intro.md](docs/intro.md) —— 一页简介
+
+单文件工具直接放在 `tools/` 下，独立仓库的工具只登记链接。
+
+## 目录结构
 
 ```
-读 https://raw.githubusercontent.com/StevenZhao666/hermes-kits/main/CATALOG.md
-按我的情况挑 1-2 个装好，装完告诉我装了什么、怎么打开、有什么限制。
+CATALOG.md              全部条目
+catalog.json            结构化目录
+docs/intro.md           简介
+md-to-docx/             技能包：Markdown → Word
+md-to-pdf/              技能包：Markdown → PDF
+prompts/                每个包对应的提示词
+tools/                  单文件桌面工具
+  color-picker/
+  network-optimizer/
+  piano/
+  gauss-elim/
+  canvas-lab/
 ```
-
-## 交付方式
-
-两种，按对方能不能收到文件选：
-
-| 场景 | 发什么 |
-|---|---|
-| 能直接把 zip 发过去（聊天软件、网盘） | 发 `md-to-docx.zip` + `prompts/md-to-docx.txt` 那段话 |
-| 只能发文字 | 发 `prompts/md-to-docx-链接.txt`，里面自带下载地址 |
-
-两种提示词都要求接收方**什么都不用回答**：agent 自己查环境、自己判断、自己装，最后只用三句人话汇报。
 
 ## 加新包
 
 ```
-kits/<包名>/            # 包本体：SKILL.md + README.md + scripts/ + demo
+<包名>/                 # 包本体：SKILL.md + README.md + scripts/ + demo
 prompts/<包名>.txt      # 提示词（文件版）
 prompts/<包名>-链接.txt # 提示词（链接版）
 ```
@@ -51,15 +54,14 @@ git add -A && git commit -m "update <包名>" && git push
 # 上传到固定的 packs 发行版（替换同名资产），不要每包建一个 release
 ```
 
-**所有包的 zip 都挂在同一个 tag 为 `packs` 的发行版下**，链接形如
+所有 zip 都挂在 tag 为 `packs` 的发行版下，链接形如
 `https://github.com/StevenZhao666/hermes-kits/releases/download/packs/<包名>.zip`。
 
-不要用 `releases/latest/download/<包名>.zip`：`latest` 是全局的"最新一个发行版"，
-一旦为某个包单独发版，其它包的链接就会 404。
+不要用 `releases/latest/download/<包名>.zip`：`latest` 是全局最新发行版，
+一旦为别的包发版，旧链接就会 404。
 
-## 原则
+## 约定
 
-- **只有一段话。** 接收方不回答问题、不看技术细节，多一个文件就多一个失败点。
-- **检查在 agent 侧完成。** 自查、查重、装依赖、跑测试都是它的事；只把「装没装、能干什么、怎么用」翻译成人话。
-- **不写关系称谓。** 同一份东西会发给不同的人，写死关系就过时了。
-- **包里不带个人路径、项目名、密钥。**
+- 包里不带个人路径、项目名、密钥
+- 单文件工具进 `tools/`，大项目只登记链接
+- 目录条目保持五项格式，`CATALOG.md` 与 `catalog.json` 同步
